@@ -1,6 +1,6 @@
 # A11y Toggle
 
-A tiny script to build accessible content toggles.
+A tiny script (less than 0.3Kb gzipped) to build accessible content toggles.
 
 ## Install
 
