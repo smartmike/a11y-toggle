@@ -15,9 +15,11 @@
     "a11y-toggle.js"
   ],
   "scripts": {
+    "copy": "cp a11y-toggle.js example/main.js",
     "minify": "uglifyjs a11y-toggle.js -o a11y-toggle.min.js -c -m",
-    "build": "npm run minify",
+    "build": "npm run minify && npm run copy",
     "predeploy": "npm run build",
+    "deploy": "git subtree push --prefix example origin gh-pages",
     "lint": "semistandard a11y-toggle.js"
   },
   "devDependencies": {

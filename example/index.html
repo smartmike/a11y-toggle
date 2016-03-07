@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A11y Toggle</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main class="main" id="main" aria-label="Content">
+      <h1>A11y Toggle</h1>
+
+      <p><a href="https://github.com/edenspiekermann/a11y-toggle">Get the code on GitHub</a></p>
+
+      <p>Pure CSS toggles using the <a href="https://css-tricks.com/the-checkbox-hack/">checkbox hack</a> introduce some usability and accessibility problems.</p>
+
+      <p>For starters, the checkbox hack relies on the <code>:checked</code> pseudo-class, which is <a href="http://quirksmode.org/css/selectors/mobile.html#t60">not supported everywhere</a>. For instance, BlackBerry browser, Opera Mini, Android Stock Browser and Firefox Android (amongst others) do not support this selector, making the whole thing broken.</p>
+
+      <p>On top of that, in order to be fully accessible a content toggle needs some extra attributes that cannot be toggled without JavaScript. The toggle itself needs a <code>aria-controls</code> attribute linking to the expandable element, and a <code>aria-expanded</code> attribute describing its state (expanded or collapsed). The collapsed element itself needs the <code>aria-hidden</code> attribute when invisible.</p>
+
+      <p><a href="https://github.com/edenspiekermann/a11y-toggle">a11y-toggle</a> takes care of all these considerations for you.</p>
+
+      <h2>Collapsed by default</h2>
+
+      <pre><code>&lt;button data-a11y-toggle
+        type="button"
+        aria-controls="toggle-1">Read more »&lt;/button>
+
+&lt;div id="toggle-1">
+  This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
+&lt;/div></code></pre>
+
+      <button type="button" data-a11y-toggle aria-controls="toggle-1">Read more »</button>
+
+      <div id="toggle-1" class="collapsible-box">
+        This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
+      </div>
+
+      <h2>Expanded by default</h2>
+
+      <pre><code>&lt;button data-a11y-toggle
+        type="button"
+        aria-controls="toggle-2"
+        aria-expanded="true">Read less »&lt;/button>
+
+&lt;div id="toggle-2" aria-hidden="false">
+  This content is visible by default. It can be collapsed again.
+&lt;/div></code></pre>
+
+      <button type="button" data-a11y-toggle aria-controls="toggle-2" aria-expanded="true">Read less »</button>
+
+      <div id="toggle-2" aria-hidden="false" class="collapsible-box">
+        This content is visible by default. It can be collapsed again.
+      </div>
+
+      <p><strong>No more excuse now. Make your toggles accessible.</strong></p>
+
+      <footer role="contentinfo">
+        &copy;&nbsp;2016 <a href="http://edenspiekermann.com">Edenspiekermann</a>
+      </footer>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
