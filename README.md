@@ -45,3 +45,26 @@ Then add this in your stylesheet (feel free to scope or restrict it):
   display: none;
 }
 ```
+
+## Notes
+
+* Initial ARIA-specific attributes such as `aria-expanded` and `aria-hidden` are being added automatically.
+* The collapsible content does not have to live right next to the toggle, hence the `aria-controls` attribute in order to provide a shortcut for assistive technologies.
+* The toggle can be something else than a `<button>` however a button is preferred as it the best suited element for such an interactive task.
+
+
+## Tests
+
+[CasperJS](http://casperjs.org) is being used to run browser tests. CasperJS has some [dependencies](http://docs.casperjs.org/en/latest/installation.html#prerequisites) that have to be installed manually. Be sure to satisfy them before running the tests.
+
+```
+npm test
+```
+
+## Deploy example
+
+The [example page](http://edenspiekermann.github.io/a11y-toggle/) is deployed through [GitHub Pages](https://pages.github.com/). 
+
+```
+npm run deploy
+```
