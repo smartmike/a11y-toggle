@@ -16,7 +16,9 @@ npm install --save a11y-toggle
 Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-controls` attribute matching an existing `id`. 
 
 ```html
-<button type="button" data-a11y-toggle aria-controls="content-container">Toggle content</button>
+<button data-a11y-toggle
+        type="button"
+        aria-controls="content-container">Toggle content</button>
 
 <div id="content-container">
   Here is some content that can be be toggled visible or invisible.
@@ -26,7 +28,10 @@ Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-contro
 To make the content expanded by default, set it up like this:
 
 ```html
-<button type="button" data-a11y-toggle aria-controls="content-container" aria-expanded="true">Toggle content</button>
+<button data-a11y-toggle
+        type="button"
+        aria-controls="content-container"
+        aria-expanded="true">Toggle content</button>
 
 <div id="content-container" aria-hidden="false">
   Here is some content that can be be toggled visible or invisible.
