@@ -2,6 +2,9 @@
 
 A tiny script (less than 0.3Kb gzipped) to build accessible content toggles.
 
+You can try the [live demo](http://edenspiekermann.github.io/a11y-toggle/).
+
+
 ## Install
 
 ```sh
