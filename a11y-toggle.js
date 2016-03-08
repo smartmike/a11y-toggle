@@ -8,7 +8,7 @@
     toggle.hasAttribute('aria-expanded') || toggle.setAttribute('aria-expanded', false);
   }
 
-  var targets = document.querySelectorAll(targetsList);
+  var targets = targetsList.length && document.querySelectorAll(targetsList);
   var targetsMap = {};
 
   for (var j = 0; j < targets.length; j += 1) {
