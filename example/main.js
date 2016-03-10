@@ -1,4 +1,4 @@
-(function () {  
+(function () {
   function objectKeys (object) {
     if (Object.keys) return Object.keys(object);
 
@@ -14,9 +14,10 @@
   for (var i = 0; i < toggles.length; i += 1) {
     var toggle = toggles[i];
     var targetId = toggle.getAttribute(namespace);
-    togglesMap['#' + targetId] = toggle.id;
+    toggle.id || toggle.setAttribute('id', targetId + '-a11y-toggle');
     toggle.hasAttribute('aria-expanded') || toggle.setAttribute('aria-expanded', false);
     toggle.hasAttribute('aria-controls') || toggle.setAttribute('aria-controls', targetId);
+    togglesMap['#' + targetId] = toggle.id;
   }
 
   var targetsList = objectKeys(togglesMap);
