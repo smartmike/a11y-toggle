@@ -25,33 +25,42 @@
       <h2>Collapsed by default</h2>
 
       <pre><code>&lt;button data-a11y-toggle
+        id="toggle-1"
         type="button"
-        aria-controls="toggle-1">Read more »&lt;/button>
+        aria-controls="toggled-1">Read more »&lt;/button>
 
-&lt;div id="toggle-1">
+&lt;div id="toggled-1">
   This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
 &lt;/div></code></pre>
 
-      <button type="button" data-a11y-toggle aria-controls="toggle-1">Read more »</button>
+      <button data-a11y-toggle
+              id="toggle-1"
+              type="button"
+              aria-controls="toggled-1">Read more »</button>
 
-      <div id="toggle-1" class="collapsible-box">
+      <div id="toggled-1" class="collapsible-box">
         This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
       </div>
 
       <h2>Expanded by default</h2>
 
       <pre><code>&lt;button data-a11y-toggle
+        id="toggle-2"
         type="button"
-        aria-controls="toggle-2"
+        aria-controls="toggled-2"
         aria-expanded="true">Read less »&lt;/button>
 
-&lt;div id="toggle-2" aria-hidden="false">
+&lt;div id="toggled-2" aria-hidden="false">
   This content is visible by default. It can be collapsed again.
 &lt;/div></code></pre>
 
-      <button type="button" data-a11y-toggle aria-controls="toggle-2" aria-expanded="true">Read less »</button>
+      <button data-a11y-toggle
+              id="toggle-2"
+              type="button"
+              aria-controls="toggled-2"
+              aria-expanded="true">Read less »</button>
 
-      <div id="toggle-2" aria-hidden="false" class="collapsible-box">
+      <div id="toggled-2" aria-hidden="false" class="collapsible-box">
         This content is visible by default. It can be collapsed again.
       </div>
 
