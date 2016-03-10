@@ -11,8 +11,8 @@ casper.test.begin('Toggle test suite', 8, function (test) {
   });
 
   casper.on('page.loaded', function () {
-    var toggleA = '[data-a11y-toggle][aria-controls="toggled-1"]';
-    var toggleB = '[data-a11y-toggle][aria-controls="toggled-2"][aria-expanded="true"]';
+    var toggleA = '[data-a11y-toggle="toggled-1"]';
+    var toggleB = '[data-a11y-toggle="toggled-2"][aria-expanded="true"]';
     var targetA = '#toggled-1';
     var targetB = '#toggled-2[aria-hidden="false"]';
 
