@@ -1,4 +1,4 @@
-(function () {
+(function () {  
   function objectKeys (object) {
     if (Object.keys) return Object.keys(object);
 
@@ -7,13 +7,16 @@
     return keys;
   }
 
-  var toggles = document.querySelectorAll('[data-a11y-toggle][aria-controls]');
+  var namespace = 'data-a11y-toggle';
+  var toggles = document.querySelectorAll('[' + namespace + ']');
   var togglesMap = {};
 
   for (var i = 0; i < toggles.length; i += 1) {
     var toggle = toggles[i];
-    togglesMap['#' + toggle.getAttribute('aria-controls')] = toggle.id;
+    var targetId = toggle.getAttribute(namespace);
+    togglesMap['#' + targetId] = toggle.id;
     toggle.hasAttribute('aria-expanded') || toggle.setAttribute('aria-expanded', false);
+    toggle.hasAttribute('aria-controls') || toggle.setAttribute('aria-controls', targetId);
   }
 
   var targetsList = objectKeys(togglesMap);
@@ -30,7 +33,7 @@
 
   document.addEventListener('click', function (event) {
     var toggle = event.target;
-    var target = targetsMap[toggle.getAttribute('aria-controls')];
+    var target = targetsMap[toggle.getAttribute(namespace)];
     var isExpanded = JSON.parse(toggle.getAttribute('aria-expanded'));
 
     target && toggle.setAttribute('aria-expanded', !isExpanded);
