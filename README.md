@@ -13,13 +13,14 @@ npm install --save a11y-toggle
 
 ## Usage
 
-Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-controls` attribute matching an existing `id`. For further accessibility reasons, it is also highly recommended to define an `id` attribute for the button itself so it can be mapped to a `aria-labelledby` attribute on the target.
+The bare minimum is to set up a `data-a11y-toggle` attribute on the toggle matching the `id` of the collapsible section (e.g. `data-a11y-toggle="my-collapsible-section"`).
+
+For further accessibility reasons, it is also highly recommended to define an `id` attribute for the button itself so it can be mapped (by the script) to a `aria-labelledby` attribute on the target.
 
 ```html
-<button data-a11y-toggle
+<button data-a11y-toggle="content-container"
         id="my-toggle-button"
-        type="button"
-        aria-controls="content-container">Toggle content</button>
+        type="button">Toggle content</button>
 
 <div id="content-container">
   Here is some content that can be be toggled visible or invisible.
@@ -29,10 +30,9 @@ Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-contro
 To make the content expanded by default, set it up like this:
 
 ```html
-<button data-a11y-toggle
+<button data-a11y-toggle="content-container"
         id="my-toggle-button"
         type="button"
-        aria-controls="content-container"
         aria-expanded="true">Toggle content</button>
 
 <div id="content-container" aria-hidden="false">
