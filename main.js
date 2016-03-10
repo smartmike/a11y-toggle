@@ -22,7 +22,7 @@
     var target = targetsMap[toggle.getAttribute('aria-controls')];
     var isExpanded = JSON.parse(toggle.getAttribute('aria-expanded'));
 
-    toggle.setAttribute('aria-expanded', !isExpanded);
-    target.setAttribute('aria-hidden', isExpanded);
+    target && toggle.setAttribute('aria-expanded', !isExpanded);
+    target && target.setAttribute('aria-hidden', isExpanded);
   });
 }());
