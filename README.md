@@ -13,10 +13,11 @@ npm install --save a11y-toggle
 
 ## Usage
 
-Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-controls` attribute matching an existing `id`. 
+Set up the `data-a11y-toggle` attribute on the toggle as well as an `aria-controls` attribute matching an existing `id`. For further accessibility reasons, it is also highly recommended to define an `id` attribute for the button itself so it can be mapped to a `aria-labelledby` attribute on the target.
 
 ```html
 <button data-a11y-toggle
+        id="my-toggle-button"
         type="button"
         aria-controls="content-container">Toggle content</button>
 
@@ -29,6 +30,7 @@ To make the content expanded by default, set it up like this:
 
 ```html
 <button data-a11y-toggle
+        id="my-toggle-button"
         type="button"
         aria-controls="content-container"
         aria-expanded="true">Toggle content</button>
@@ -48,7 +50,7 @@ Then add this in your stylesheet (feel free to scope or restrict it):
 
 ## Notes
 
-* Initial ARIA-specific attributes such as `aria-expanded` and `aria-hidden` are being added automatically.
+* Initial ARIA-specific attributes such as `aria-expanded`, `aria-hidden` and `aria-labelledby` are being added automatically.
 * The collapsible content does not have to live right next to the toggle, hence the `aria-controls` attribute in order to provide a shortcut for assistive technologies.
 * The toggle can be something else than a `<button>` however a button is preferred as it the best suited element for such an interactive task.
 
