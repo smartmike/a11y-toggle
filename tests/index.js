@@ -11,10 +11,10 @@ casper.test.begin('Toggle test suite', 8, function (test) {
   });
 
   casper.on('page.loaded', function () {
-    var toggleA = '[data-a11y-toggle][aria-controls=\'toggle-1\']';
-    var toggleB = '[data-a11y-toggle][aria-controls=\'toggle-2\'][aria-expanded="true"]';
-    var targetA = '#toggle-1';
-    var targetB = '#toggle-2[aria-hidden="false"]';
+    var toggleA = '[data-a11y-toggle][aria-controls="toggled-1"]';
+    var toggleB = '[data-a11y-toggle][aria-controls="toggled-2"][aria-expanded="true"]';
+    var targetA = '#toggled-1';
+    var targetB = '#toggled-2[aria-hidden="false"]';
 
     this.then(function () {
       this.echo('\nTest initial setup');
@@ -43,5 +43,4 @@ casper.test.begin('Toggle test suite', 8, function (test) {
     this.test.done();
     this.exit();
   });
-
 });
