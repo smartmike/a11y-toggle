@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "A tiny script to make accessible content toggles.",
   "homepage": "https://github.com/edenspiekermann/a11y-toggle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edenspiekermann/a11y-toggle.git"
+  },
   "main": "a11y-toggle.js",
   "keywords": [
     "toggle",
