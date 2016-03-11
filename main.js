@@ -46,7 +46,7 @@
   document.addEventListener('click', function (event) {
     var toggle = event.target;
     var target = targetsMap[toggle.getAttribute(namespace)];
-    var isExpanded = JSON.parse(toggle.getAttribute('aria-expanded'));
+    var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
     if (target) {
       toggle.setAttribute('aria-expanded', !isExpanded);
