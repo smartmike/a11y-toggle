@@ -58,10 +58,11 @@
     var toggle = event.target.hasAttribute(namespace)
       ? event.target
       : closest(event.target, '[' + namespace + ']');
-    var target = targetsMap[toggle.getAttribute(namespace)];
-    var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    var target = toggle && targetsMap[toggle.getAttribute(namespace)];
 
     if (target) {
+      var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
       toggle.setAttribute('aria-expanded', !isExpanded);
       target.setAttribute('aria-hidden', isExpanded);
     }
