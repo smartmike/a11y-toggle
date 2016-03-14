@@ -8,6 +8,17 @@
     return keys;
   }
 
+  function closest(el, selector) {
+    var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
+
+    while (el.parentElement) {
+      if (el[matches](selector)) return el;
+      el = el.parentElement;
+    }
+
+    return null;
+  }
+
   var namespace = 'data-a11y-toggle';
   var toggles = document.querySelectorAll('[' + namespace + ']');
   var togglesMap = {};
@@ -44,7 +55,9 @@
   }
 
   document.addEventListener('click', function (event) {
-    var toggle = event.target;
+    var toggle = event.target.hasAttribute(namespace)
+      ? event.target
+      : closest(event.target, '[' + namespace + ']');
     var target = targetsMap[toggle.getAttribute(namespace)];
     var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
