@@ -1,11 +1,10 @@
 (function () {
-  // Simple polyfill for Object.keys
-  function objectKeys (object) {
-    if (Object.keys) return Object.keys(object);
+  'use strict';
 
-    var keys = [];
-    for (var key in object) object.hasOwnProperty(key) && keys.push(key);
-    return keys;
+  var internalId = 0;
+
+  function $ (selector) {
+    return Array.prototype.slice.call(document.querySelectorAll(selector));
   }
 
   function closest(el, selector) {
@@ -19,52 +18,46 @@
     return null;
   }
 
-  var namespace = 'data-a11y-toggle';
-  var toggles = document.querySelectorAll('[' + namespace + ']');
-  var togglesMap = {};
+  var togglesMap = $('[data-a11y-toggle]').reduce(function (acc, toggle) {
+    var targetId = toggle.getAttribute('data-a11y-toggle');
 
-  // Loop over the toggles
-  for (var i = 0; i < toggles.length; i += 1) {
-    var toggle = toggles[i];
-    var targetId = toggle.getAttribute(namespace);
+    toggle.id || toggle.setAttribute('id', 'a11y-toggle-' + internalId++);
+    toggle.hasAttribute('aria-expanded') || toggle.setAttribute('aria-expanded', true);
+    toggle.setAttribute('aria-controls', targetId);
 
-    // Set `id`, `aria-expanded` and `aria-controls` if not set yet
-    toggle.id || toggle.setAttribute('id', targetId + '-a11y-toggle');
-    toggle.hasAttribute('aria-expanded') || toggle.setAttribute('aria-expanded', false);
-    toggle.hasAttribute('aria-controls') || toggle.setAttribute('aria-controls', targetId);
+    acc['#' + targetId] = acc['#' + targetId] || [];
+    acc['#' + targetId].push(toggle);
 
-    // Map target `id` selector with toggle `id`
-    togglesMap['#' + targetId] = toggle.id;
-  }
+    return acc;
+  }, {});
 
-  var targetsList = objectKeys(togglesMap);
-  var targets = targetsList.length && document.querySelectorAll(targetsList);
-  var targetsMap = {};
+  var targetsMap = $(Object.keys(togglesMap)).reduce(function (acc, target) {
+    var labelledby = togglesMap['#' + target.id].map(function (toggle) {
+      return toggle.id;
+    }).join(' ');
 
-  // Loop over targets
-  for (var j = 0; j < targets.length; j += 1) {
-    var target = targets[j];
-    var toggleId = togglesMap['#' + target.id];
+    target.hasAttribute('aria-hidden') || target.setAttribute('aria-hidden', false);
+    target.hasAttribute('aria-labelledby') || target.setAttribute('aria-labelledby', labelledby);
 
-    // Set `aria-hidden` and `aria-labelledby` if not set yet
-    target.hasAttribute('aria-hidden') || target.setAttribute('aria-hidden', true);
-    target.hasAttribute('aria-labelledby') || (toggleId && target.setAttribute('aria-labelledby', toggleId));
+    acc[target.id] = target;
 
-    // Map target `id` with target node for quick find on click event
-    targetsMap[target.id] = target;
-  }
+    return acc;
+  }, {});
 
   document.addEventListener('click', function (event) {
-    var toggle = event.target.hasAttribute(namespace)
+    var toggle = event.target.hasAttribute('data-a11y-toggle')
       ? event.target
-      : closest(event.target, '[' + namespace + ']');
-    var target = toggle && targetsMap[toggle.getAttribute(namespace)];
+      : closest(event.target, '[data-a11y-toggle]');
+    var target = toggle && targetsMap[toggle.getAttribute('aria-controls')];
 
-    if (target) {
-      var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    if (!target) return false;
 
-      toggle.setAttribute('aria-expanded', !isExpanded);
-      target.setAttribute('aria-hidden', isExpanded);
-    }
+    var isExpanded = target.getAttribute('aria-hidden') === 'false';
+    var toggles = togglesMap['#' + target.id];
+
+    target.setAttribute('aria-hidden', isExpanded);
+    toggles.forEach(function (toggle) {
+      return toggle.setAttribute('aria-expanded', !isExpanded);
+    });
   });
-}());
+})();

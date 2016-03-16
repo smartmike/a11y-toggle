@@ -1,46 +1,106 @@
-/* global casper */
+describe('Initial setup', function () {
+  var toggle, target;
+  var actual, expected;
 
-casper.test.begin('Toggle test suite', 8, function (test) {
-  casper.start('http://edenspiekermann.github.io/a11y-toggle/', function () {
-    this.page.onConsoleMessage = function (msg, lineNum, sourceId) {
-      console.log('CONSOLE: ' + msg);
-    };
-
-    this.page.injectJs('../a11y-toggle.js');
-    this.emit('page.loaded');
+  it('should add `id` attribute to toggle if not set', function () {
+    actual = document.querySelector('[data-a11y-toggle="t0"]').id;
+    expected = 'a11y-toggle-0';
+    expect(actual).to.be.equal(expected);
   });
 
-  casper.on('page.loaded', function () {
-    var toggleA = '[data-a11y-toggle="toggled-1"]';
-    var toggleB = '[data-a11y-toggle="toggled-2"][aria-expanded="true"]';
-    var targetA = '#toggled-1';
-    var targetB = '#toggled-2[aria-hidden="false"]';
-
-    this.then(function () {
-      this.echo('\nTest initial setup');
-      test.assertExist(toggleA);
-      test.assertExist(toggleB);
-      test.assertExist(targetA);
-      test.assertExist(targetB);
-    });
-
-    this.then(function () {
-      this.echo('\nTest expanding content');
-      this.click(toggleA);
-      test.assertExist(toggleA + '[aria-expanded="true"]');
-      test.assertExist(targetA + '[aria-hidden="false"]');
-    });
-
-    this.then(function () {
-      this.echo('\nTest collapsing content');
-      this.click(toggleB);
-      test.assertExist(toggleB.replace('true', 'false'));
-      test.assertExist(targetB.replace('false', 'true'));
-    });
+  it('should not add `id` attribute to toggle if already set', function () {
+    actual = document.querySelector('[data-a11y-toggle="t1"]').id;
+    expected = 'custom-id-1';
+    expect(actual).to.be.equal(expected);
   });
 
-  casper.run(function () {
-    this.test.done();
-    this.exit();
+  it('should add `aria-expanded` attribute to toggle if not set', function () {
+    actual = document.querySelector('[data-a11y-toggle="t2"]').getAttribute('aria-expanded');
+    expected = 'true';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should not add `aria-expanded` attribute to toggle if already set', function () {
+    actual = document.querySelector('[data-a11y-toggle="t3"]').getAttribute('aria-expanded');
+    expected = 'false';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should transpose `data-a11y-toggle` into `aria-controls` attribute to toggle', function () {
+    actual = document.querySelector('[data-a11y-toggle="t4"]').getAttribute('aria-controls');
+    expected = document.querySelector('[data-a11y-toggle="t4"]').getAttribute('data-a11y-toggle');
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should add `aria-hidden` attribute to target if not set', function () {
+    actual = document.querySelector('#t5').getAttribute('aria-hidden');
+    expected = 'false';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should not add `aria-hidden` attribute to target if already set', function () {
+    actual = document.querySelector('#t6').getAttribute('aria-hidden');
+    expected = 'true';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should add `aria-labelledby` attribute to target if not set', function () {
+    actual = document.querySelector('#t7').getAttribute('aria-labelledby');
+    expected = 'custom-id-2';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should add `aria-labelledby` attribute to target if not set with multiple toggles', function () {
+    actual = document.querySelector('#t8').getAttribute('aria-labelledby');
+    expected = 'custom-id-3 custom-id-4';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should not add `aria-labelledby` attribute to target if already set', function () {
+    actual = document.querySelector('#t9').getAttribute('aria-labelledby');
+    expected = 'custom-id-5';
+    expect(actual).to.be.equal(expected);
+  });
+});
+
+describe('Click events', function () {
+  var actual, expected;
+
+  it('should toggle `aria-hidden` attribute on target when clicked', function () {
+    var toggle = document.querySelector('[data-a11y-toggle="t10"]');
+    var target = document.querySelector('#t10');
+    toggle.click();
+
+    actual = target.getAttribute('aria-hidden');
+    expected = 'true';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should toggle `aria-expanded` attribute on toggled when clicked', function () {
+    var toggle = document.querySelector('[data-a11y-toggle="t11"]');
+    toggle.click();
+
+    actual = toggle.getAttribute('aria-expanded');
+    expected = 'false';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should toggle `aria-expanded` attribute on related toggles when one clicked', function () {
+    var toggle = document.querySelector('[data-a11y-toggle="t12"]');
+    var toggleB = document.querySelector('#custom-id-6');
+    toggle.click();
+
+    actual = toggleB.getAttribute('aria-expanded');
+    expected = 'false';
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should work correctly with nested DOM in toggle', function () {
+    var toggle = document.querySelector('[data-a11y-toggle="t13"]');
+    toggle.click();
+
+    actual = toggle.getAttribute('aria-expanded');
+    expected = 'false';
+    expect(actual).to.be.equal(expected);
   });
 });

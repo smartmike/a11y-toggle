@@ -56,7 +56,7 @@ Then add this in your stylesheet (feel free to scope or restrict it):
 
 ## Tests
 
-[CasperJS](http://casperjs.org) is being used to run browser tests. CasperJS has some [dependencies](http://docs.casperjs.org/en/latest/installation.html#prerequisites) that have to be installed manually. Be sure to satisfy them before running the tests.
+[Mocha](https://mochajs.org/) and [expect.js](https://github.com/Automattic/expect.js) are used to run browser tests.
 
 ```
 npm test
