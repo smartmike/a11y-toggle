@@ -22,36 +22,36 @@
 
       <p><a href="https://github.com/edenspiekermann/a11y-toggle">a11y-toggle</a> takes care of all these considerations for you. Initial necessary attributes are being added by the script so you don’t even have to care about this.</p>
 
-      <h2>Collapsed by default</h2>
-
-      <pre><code>&lt;button data-a11y-toggle="toggled-1" type="button">
-  Read more »
-&lt;/button>
-
-&lt;div id="toggled-1">
-  This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
-&lt;/div></code></pre>
-
-      <button data-a11y-toggle="toggled-1" type="button">Read more »</button>
-
-      <div id="toggled-1" class="collapsible-box">
-        This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
-      </div>
-
       <h2>Expanded by default</h2>
 
-      <pre><code>&lt;button data-a11y-toggle="toggled-2" aria-expanded="true" type="button">
+      <pre><code>&lt;button data-a11y-toggle="toggled-1" type="button">
   Read less »
 &lt;/button>
 
-&lt;div id="toggled-2" aria-hidden="false">
+&lt;div id="toggled-1">
   This content is visible by default. It can be collapsed again.
 &lt;/div></code></pre>
 
-      <button data-a11y-toggle="toggled-2" aria-expanded="true" type="button">Read less »</button>
+      <button data-a11y-toggle="toggled-1" type="button">Read less »</button>
 
-      <div id="toggled-2" aria-hidden="false" class="collapsible-box">
+      <div id="toggled-1" class="collapsible-box">
         This content is visible by default. It can be collapsed again.
+      </div>
+
+      <h2>Collapsed by default</h2>
+
+      <pre><code>&lt;button data-a11y-toggle="toggled-2" aria-expanded="false" type="button">
+  Read more »
+&lt;/button>
+
+&lt;div id="toggled-2" aria-hidden="true">
+  This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
+&lt;/div></code></pre>
+
+      <button data-a11y-toggle="toggled-2" aria-expanded="false" type="button">Read more »</button>
+
+      <div id="toggled-2" aria-hidden="true" class="collapsible-box">
+        This content is hidden by default. It is only revealed once toggled. It can be collapsed again.
       </div>
 
       <p><strong>No more excuse now. Make your toggles accessible.</strong></p>

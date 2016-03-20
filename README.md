@@ -26,14 +26,14 @@ The bare minimum is to set up a `data-a11y-toggle` attribute on the toggle match
 </div>
 ```
 
-To make the content expanded by default, set `aria-expanded="true"` to the toggle and `aria-hidden="false"` to the collapsible container like this:
+To make the content collapsed by default, set `aria-expanded="false"` to the toggle and `aria-hidden="true"` to the collapsible container like this:
 
 ```html
-<button data-a11y-toggle="content-container" aria-expanded="true" type="button">
+<button data-a11y-toggle="content-container" aria-expanded="false" type="button">
   Here should be a descriptive label for the collapsed content.
 </button>
 
-<div id="content-container" aria-hidden="false">
+<div id="content-container" aria-hidden="true">
   Here is some content that can be be toggled visible or invisible.
 </div>
 ```
