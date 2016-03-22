@@ -7,12 +7,20 @@
     return Array.prototype.slice.call(document.querySelectorAll(selector));
   }
 
-  function closest(el, selector) {
-    var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
+  function closest (el, selector) {
+    if (el.closest) return el.closest(selector);
 
-    while (el.parentElement) {
-      if (el[matches](selector)) return el;
-      el = el.parentElement;
+    var matches = el.webkitMatchesSelector
+      ? 'webkitMatchesSelector'
+      : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
+
+    while (el) {
+      if (el.nodeType === 1 && el[matches](selector)) {
+        console.log(el);
+        return el;
+      }
+
+      el = el.parentNode;
     }
 
     return null;
@@ -45,9 +53,7 @@
   }, {});
 
   document.addEventListener('click', function (event) {
-    var toggle = event.target.hasAttribute('data-a11y-toggle')
-      ? event.target
-      : closest(event.target, '[data-a11y-toggle]');
+    var toggle = closest(event.target, '[data-a11y-toggle]');
     var target = toggle && targetsMap[toggle.getAttribute('aria-controls')];
 
     if (!target) return false;
