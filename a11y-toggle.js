@@ -16,7 +16,6 @@
 
     while (el) {
       if (el.nodeType === 1 && el[matches](selector)) {
-        console.log(el);
         return el;
       }
 
