@@ -26,26 +26,18 @@ The bare minimum is to set up a `data-a11y-toggle` attribute on the toggle match
 </div>
 ```
 
-To make the content collapsed by default, set `aria-expanded="false"` to the toggle and `aria-hidden="true"` to the collapsible container like this:
-
-```html
-<button data-a11y-toggle="content-container" aria-expanded="false" type="button">
-  Here should be a descriptive label for the collapsed content.
-</button>
-
-<div id="content-container" aria-hidden="true">
-  Here is some content that can be be toggled visible or invisible.
-</div>
-```
-
 Then add this in your stylesheet (feel free to scope or restrict it):
 
 ```css
-[aria-hidden="true"] {
+/**
+ * First selector visually hides the toggled section when collapsed.
+ * Second selector hides the toggles when JavaScript is disabled or not loaded.
+ */
+[aria-hidden="true"],
+[data-a11y-toggle]:not([aria-controls]) {
   display: none;
 }
 ```
-
 
 ## Notes
 
