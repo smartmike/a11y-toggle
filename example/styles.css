@@ -2,20 +2,29 @@
  * Necessary styling for the toggle to work
  * -------------------------------------------------------------------------- */
 
+.collapsible-box {
+ display: block;
+ overflow: hidden;
+ opacity: 1;
+ transition: visibility 0s ease, max-height 2s ease, opacity 2s ease ;
+ max-height: 80em;
+ visibility: visible;
+ transition-delay: 0s;
+}
+
+.collapsible-box[aria-hidden='true'] {
+ display: block;
+ max-height: 0;
+ opacity: 0;
+ visibility: hidden;
+ transition-delay: 2s, 0s, 0s;
+}
+
 [data-a11y-toggle]:not([aria-controls]),
-[aria-hidden="true"] {
+[aria-hidden='true']:not(.collapsible-box) {
   display: none;
 }
 
-/* -------------------------------------------------------------------------- *\
- * Styling to make the toggle look good
- * -------------------------------------------------------------------------- */
-
-.collapsible-box {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin: 1em 0;
-  padding: 1em;
-}
 
 /* -------------------------------------------------------------------------- *\
  * Base stuff
@@ -71,6 +80,11 @@ pre {
   overflow: auto;
   margin: 1em 0;
   padding: 1em;
+}
+
+pre > code {
+  display: block;
+  padding: 0 1.5em;
 }
 
 /* -------------------------------------------------------------------------- *\
