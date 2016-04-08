@@ -2,6 +2,7 @@
  * Necessary styling for the toggle to work
  * -------------------------------------------------------------------------- */
 
+[data-a11y-toggle]:not([aria-controls]),
 [aria-hidden="true"] {
   display: none;
 }
@@ -33,6 +34,10 @@ h1 {
   font-size: 1.6em;
   line-height: 1.1;
   font-family: 'ESPI Slab', sans-serif;
+}
+
+h3::before {
+  content: '_';
 }
 
 a {
