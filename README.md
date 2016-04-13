@@ -11,6 +11,10 @@ You can try the [live demo](http://edenspiekermann.github.io/a11y-toggle/).
 npm install --save a11y-toggle
 ```
 
+```sh
+bower install a11y-toggle
+```
+
 
 ## Usage
 
