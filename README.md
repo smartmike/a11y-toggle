@@ -43,6 +43,8 @@ Then add this in your stylesheet (feel free to scope or restrict it):
 }
 ```
 
+See more detailed examples on the [demo page](http://edenspiekermann.github.io/a11y-toggle/), including slide-in / fade animations, and expanded-by-default behaviour.
+
 ## Notes
 
 * Initial ARIA-specific attributes such as `aria-expanded`, `aria-hidden` and `aria-labelledby`, as well as `id` on the toggle element are being added automatically if not already set.

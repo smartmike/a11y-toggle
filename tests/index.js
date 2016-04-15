@@ -14,15 +14,15 @@ describe('Initial setup', function () {
     expect(actual).to.be.equal(expected);
   });
 
-  it('should add `aria-expanded` attribute to toggle if not set', function () {
+  it('should add `aria-expanded="false"` attribute to toggle if no `data-a11y-toggle-open` on target', function () {
     actual = document.querySelector('[data-a11y-toggle="t2"]').getAttribute('aria-expanded');
-    expected = 'true';
+    expected = 'false';
     expect(actual).to.be.equal(expected);
   });
 
-  it('should not add `aria-expanded` attribute to toggle if already set', function () {
+  it('should add `aria-expanded="true"` attribute to toggle if `data-a11y-toggle-open` on target', function () {
     actual = document.querySelector('[data-a11y-toggle="t3"]').getAttribute('aria-expanded');
-    expected = 'false';
+    expected = 'true';
     expect(actual).to.be.equal(expected);
   });
 
@@ -32,15 +32,15 @@ describe('Initial setup', function () {
     expect(actual).to.be.equal(expected);
   });
 
-  it('should add `aria-hidden` attribute to target if not set', function () {
+  it('should add `aria-hidden="true"` attribute to target if no `data-a11y-toggle-open`', function () {
     actual = document.querySelector('#t5').getAttribute('aria-hidden');
-    expected = 'false';
+    expected = 'true';
     expect(actual).to.be.equal(expected);
   });
 
-  it('should not add `aria-hidden` attribute to target if already set', function () {
+  it('should add `aria-hidden="false"` attribute to target if `data-a11y-toggle-open`', function () {
     actual = document.querySelector('#t6').getAttribute('aria-hidden');
-    expected = 'true';
+    expected = 'false';
     expect(actual).to.be.equal(expected);
   });
 
@@ -72,7 +72,7 @@ describe('Click events', function () {
     toggle.click();
 
     actual = target.getAttribute('aria-hidden');
-    expected = 'true';
+    expected = 'false';
     expect(actual).to.be.equal(expected);
   });
 
@@ -81,7 +81,7 @@ describe('Click events', function () {
     toggle.click();
 
     actual = toggle.getAttribute('aria-expanded');
-    expected = 'false';
+    expected = 'true';
     expect(actual).to.be.equal(expected);
   });
 
@@ -91,7 +91,7 @@ describe('Click events', function () {
     toggle.click();
 
     actual = toggleB.getAttribute('aria-expanded');
-    expected = 'false';
+    expected = 'true';
     expect(actual).to.be.equal(expected);
   });
 
@@ -100,7 +100,7 @@ describe('Click events', function () {
     toggle.click();
 
     actual = toggle.getAttribute('aria-expanded');
-    expected = 'false';
+    expected = 'true';
     expect(actual).to.be.equal(expected);
   });
 });
