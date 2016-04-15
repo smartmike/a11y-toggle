@@ -24,14 +24,14 @@
       <p><a href="https://github.com/edenspiekermann/a11y-toggle">a11y-toggle</a> takes care of all these considerations for you. Initial necessary attributes are being added by the script so you don’t even have to care about this.</p>
 
       <p><strong>No more excuse now. Make your toggles accessible.</strong></p>
-      
+
 
 
 
 
       <section>
         <h2>Basic example</h2>
-        
+
         <h3>Markup</h3>
 
         <p>The bare minimum is a button with the <code>data-a11y-toggle</code> attribute mapped to an existing <code>id</code>.</p>
@@ -87,6 +87,28 @@
 
   &lt;div id="toggle-E" data-a11y-toggle-open>
     Some content that is expanded by default…
+  &lt;/div>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2>Non Interactive Elements</h2>
+
+        <p>If you want to use a non-interactive element such as `span`, `dt`, etc. you must add `tabindex="0"` and `role="button"` in order to make it accessible via keyboard.</p>
+
+        <p>Note, as non-interactive elements rely on javascript for keyboard control, it's probably better to use a button where possible.</p>
+
+        <span role="button" tabindex="0" data-a11y-toggle="toggle-F">Toggle code »</span>
+
+        <div id="toggle-F" data-a11y-toggle-open>
+          <pre class="language-html"><code>
+  &lt;span role="button" data-a11y-toggle="toggle-F">
+    Toggle code »
+  &lt;/span>
+
+  &lt;div id="toggle-F" data-a11y-toggle-open>
+    Some great content…
   &lt;/div>
           </code></pre>
         </div>

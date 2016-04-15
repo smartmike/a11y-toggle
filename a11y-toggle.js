@@ -3,6 +3,8 @@
 
   var internalId = 0;
 
+  var INTERACTIVE_ELEMENTS = ["BUTTON", "A"];
+
   function $ (selector) {
     return Array.prototype.slice.call(document.querySelectorAll(selector));
   }
@@ -50,7 +52,7 @@
     targetsMap[target.id] = target;
   });
 
-  document.addEventListener('click', function (event) {
+  var handleClick = function (event) {
     var toggle = getClosestToggle(event.target);
     var target = toggle && targetsMap[toggle.getAttribute('aria-controls')];
 
@@ -65,5 +67,17 @@
     toggles.forEach(function (toggle) {
       toggle.setAttribute('aria-expanded', !isExpanded);
     });
+  };
+
+  document.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      var toggle = getClosestToggle(event.target);
+
+      if (INTERACTIVE_ELEMENTS.indexOf(toggle.tagName.toUpperCase()) === -1) {
+        handleClick(event);
+      }
+    }
   });
+
+  document.addEventListener('click', handleClick);
 })();
